@@ -1,4 +1,8 @@
 import csv
+import easygui as eg
+
+def doneornot():
+    return eg.ccbox("Would you like to *?","System Message",["Yes","No"])
 
 reader = csv.reader(open("test.csv", "rb"))
 
@@ -41,8 +45,11 @@ while exit_flag == "N" or exit_flag == "n" or exit_flag == "":
             students_searched += 1
     if students_searched == len(grades):
         print "No students found in grade", grade_to_search
-    
-    exit_flag = raw_input("Done? Y/N ")
+    if doneornot() == 0:
+        exit_flag = "Y"
+    else:
+        exit_flag = "N"
+##    exit_flag = raw_input("Done? Y/N ")
 
 exit_flag = "N"
 
@@ -84,12 +91,3 @@ while exit_flag == "N" or exit_flag == "n" or exit_flag == "":
     for row in read_file:
         writer.writerow(row)
     exit_flag = raw_input("Done? Y/N ")
-
-
-
-
-    
-
-
-
-
