@@ -1,0 +1,95 @@
+import csv
+
+reader = csv.reader(open("test.csv", "rb"))
+
+string = ""
+read_file = []
+names = []
+grades = []
+courses = []
+
+for row in reader:
+    read_file.append(row)
+    for i in range(len(row)):
+        if i == 0:
+            names.append(row[i])
+        if i == 1:
+            grades.append(row[i])
+        if i == 2:
+            courses.append(row[i])
+    for word in row:        
+        print word,
+    print '\n'
+
+##Pop all labels from the lists
+names.pop(0)
+grades.pop(0)
+courses.pop(0)
+###############################
+
+
+exit_flag = "N"
+
+while exit_flag == "N" or exit_flag == "n" or exit_flag == "":
+    grade_to_search = raw_input("Find students in grade: ")
+    students_searched = 0
+    ##Find all students in specified grade    
+    for i in range(len(grades)):        
+        if grades[i] == grade_to_search:
+            print names[i]
+        else:
+            students_searched += 1
+    if students_searched == len(grades):
+        print "No students found in grade", grade_to_search
+    
+    exit_flag = raw_input("Done? Y/N ")
+
+exit_flag = "N"
+
+while exit_flag == "N" or exit_flag == "n" or exit_flag == "":
+    course_to_find = raw_input("Find students in course: ")
+    students_searched = 0
+    ##Find all students in specified course
+    for i in range(len(courses)):
+        if courses[i] == course_to_find:
+            print names[i]
+        else:
+            students_searched += 1
+    if students_searched == len(courses):
+        print "No students found in course", course_to_find
+    exit_flag = raw_input("Done? Y/N ")
+
+
+exit_flag = "N"
+
+while exit_flag == "N" or exit_flag == "n" or exit_flag == "":
+    what_to_do = raw_input("Show all: ")
+    if what_to_do == "students" or what_to_do == "Students":
+        print names
+    if what_to_do == "grades" or what_to_do == "Grades":
+        print grades
+    if what_to_do == "courses" or what_to_do == "Courses":
+        print courses
+    exit_flag = raw_input("Done? Y/N ")
+
+exit_flag = "N"
+
+while exit_flag == "N" or exit_flag == "n" or exit_flag == "":
+    new_name = raw_input("Enter a new student: ")
+    new_grade = raw_input("Enter their grade: ")
+    new_course = raw_input("Enter their course: ")    
+    row_to_write = [new_name, new_grade, new_course]
+    read_file.append(row_to_write)
+    writer = csv.writer(open("test.csv", "wb"))
+    for row in read_file:
+        writer.writerow(row)
+    exit_flag = raw_input("Done? Y/N ")
+
+
+
+
+    
+
+
+
+
