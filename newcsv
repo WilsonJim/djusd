@@ -1,0 +1,86 @@
+import csv
+
+reader = csv.reader(open("Data for ICS project Nov 2013.csv", "rb"))
+
+string = ""
+read_file = []
+s_numbers = []
+grades = []
+c1 = []
+c2 = []
+c3 = []
+c4 = []
+c5 = []
+c6 = []
+c7 = []
+c8 = []
+c9 = []
+c10 = []
+crs_count = []
+
+## Go through the file and append each item in each column to a list
+for row in reader:
+    read_file.append(row)
+    for i in range(len(row)):
+        if i == 0:##Student Numbers
+            s_numbers.append(row[i])
+        if i == 1: ##Grades         
+            grades.append(row[i])
+        if i == 2:##C1
+            c1.append(row[i])
+        if i == 3:##C2
+            c2.append(row[i])
+        if i == 4:##C3
+            c3.append(row[i])
+        if i == 5:##C4
+            c4.append(row[i])
+        if i == 6:##C5
+            c5.append(row[i])
+        if i == 7:##C6
+            c6.append(row[i])
+        if i == 8:##C7
+            c7.append(row[i])
+        if i == 9:##C8
+            c8.append(row[i])
+        if i == 10:##C9
+            c9.append(row[i])
+        if i == 11:##C10
+            c10.append(row[i])
+        if i == 12:##crs_count
+            crs_count.append(row[i])
+            
+
+##Pop all labels from the lists
+s_numbers.pop(0)
+grades.pop(0)
+c1.pop(0)
+c2.pop(0)
+c3.pop(0)
+c4.pop(0)
+c5.pop(0)
+c6.pop(0)
+c7.pop(0)
+c8.pop(0)
+c9.pop(0)
+c10.pop(0)
+crs_count.pop(0)
+###############################
+
+codes = []
+descriptions = []
+prerequisites = []
+
+reader = csv.reader(open("Course Codes.csv", "rb"))
+for row in reader:
+    for i in range(len(row)):
+        if i == 0:##Course Code
+            codes.append(row[i])
+        if i == 1:##Description
+            descriptions.append(row[i])
+        if i == 2:##Prerequisite
+            prerequisites.append(row[i])
+
+codes.pop(0)
+descriptions.pop(0)
+prerequisites.pop(0)
+
