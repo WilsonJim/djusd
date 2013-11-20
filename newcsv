@@ -1,4 +1,80 @@
 import csv
+import easygui as eg
+
+title = "YRDSB Student-Timetable"
+eg.msgbox("Welcome to YRDSB Students-Timetable",title)
+
+def doneornot():
+    return eg.ccbox("Would you like to continue searching?","System Message",["Yes","No"])
+
+def choices2():
+    return eg.choicebox("Search students by grade","Student Search",["9","10","11","12"])
+
+def choices3():
+    return eg.textbox("Search students by course","Student Search")
+
+def choices4():
+    return eg.textbox("Search students by student number","Student Search")
+
+def mainchoice():
+    return eg.choicebox("How would you like to search?","Welcome to the Program",["Grade","Courses","Student Number"])
+
+def showallchoice():
+    return eg.choicebox("How would you like to see?","Welcome to the Program",["Courses","Name"])
+
+
+def find_student_in_grade(grade):
+    exit_flag = "N"
+    grade_to_search = str(grade)
+    while exit_flag == "N" or exit_flag == "n" or exit_flag == "":        
+        students_searched = 0
+        ##Find all students in specified grade    
+        for i in range(len(grades)):        
+            if grades[i] == grade_to_search:
+                print s_numbers[i]
+                exit_flag = "Y"
+            else:
+                students_searched += 1
+                exit_flag = "Y"
+        if students_searched == len(grades):
+            print "No students found in grade", grade_to_search
+
+def display_all(data):
+    exit_flag = "N"
+    while exit_flag == "N" or exit_flag == "n" or exit_flag == "":
+        if data == "students" or data == "Students":
+            print names
+        if data == "grades" or data == "Grades":
+            print grades
+        if data == "courses" or data == "Courses":
+            print courses
+        exit_flag = raw_input("Done? Y/N ")
+
+def enter_new_student(name,grade,course):
+    exit_flag = "N"
+    grade = str(grade)
+    while exit_flag == "N" or exit_flag == "n" or exit_flag == "":
+        row_to_write = [name, grade, course]
+        read_file.append(row_to_write)
+        writer = csv.writer(open("test.csv", "wb"))
+        for row in read_file:
+            writer.writerow(row)            
+        exit_flag = raw_input("Done? Y/N ")
+        
+def find_student_in_course(course):
+    exit_flag = "N"    
+    students_searched = 0
+    for courses in all_course_lists:            
+        ##Find all students in specified course
+        for i in range(len(courses)):
+            if courses[i] == course:
+                print s_numbers[i]
+            else:
+                students_searched += 1
+    if students_searched == len(courses):
+        print "No students found in course", course
+
+
 
 reader = csv.reader(open("Data for ICS project Nov 2013.csv", "rb"))
 
@@ -17,6 +93,8 @@ c8 = []
 c9 = []
 c10 = []
 crs_count = []
+
+
 
 ## Go through the file and append each item in each column to a list
 for row in reader:
@@ -66,21 +144,35 @@ c10.pop(0)
 crs_count.pop(0)
 ###############################
 
-codes = []
-descriptions = []
-prerequisites = []
 
-reader = csv.reader(open("Course Codes.csv", "rb"))
-for row in reader:
-    for i in range(len(row)):
-        if i == 0:##Course Code
-            codes.append(row[i])
-        if i == 1:##Description
-            descriptions.append(row[i])
-        if i == 2:##Prerequisite
-            prerequisites.append(row[i])
+all_course_lists = [c1,c2,c3,c4,c5,c6,c7,c8,c9,c10]
 
-codes.pop(0)
-descriptions.pop(0)
-prerequisites.pop(0)
+
+
+######################## Main Program
+a = True
+
+while a == True:
+    choice = mainchoice()
+    if choice == "Grade":
+        grade = choices2()
+        find_student_in_grade(grade)
+        if doneornot() == 0:
+            a = False
+            
+    if choice == "Courses":
+        course = choices3()
+        find_student_in_course(course)
+        if doneornot() == 0:
+            a = False
+            
+    if choice == "Student Number":
+        number = choices4()
+        find_student_in_number(number)
+        if doneornot() == 0:
+            a = False
+
+
+
+
 
