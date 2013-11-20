@@ -1,0 +1,14 @@
+def find_student_in_course(course):
+    exit_flag = "N"    
+    while exit_flag == "N" or exit_flag == "n" or exit_flag == "":
+        students_searched = 0
+        for courses in all_course_lists:            
+            ##Find all students in specified course
+            for i in range(len(courses)):
+                if courses[i] == course:
+                    print s_numbers[i]
+                else:
+                    students_searched += 1
+        if students_searched == len(courses):
+            print "No students found in course", course
+        exit_flag = raw_input("Done? Y/N ")
