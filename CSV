@@ -1,132 +1,164 @@
 import csv
 import easygui as eg
 
-def doneornot():
-    return eg.ccbox("Would you like to *?","System Message",["Yes","No"])
+title = "YRDSB Student-Timetable"
+eg.msgbox("Welcome to YRDSB Students-Timetable",title)
 
-reader = csv.reader(open("test.csv", "rb"))
+def doneornot():
+    return eg.ccbox("Would you like to continue searching?","System Message",["Yes","No"])
+
+def choices2():
+    return eg.choicebox("Search students by grade","Student Search",["9","10","11","12"])
+
+def choices3():
+    return eg.choicebox("Search students by course","Student Search",["ICS4U","SPH3U","TIJ1O","BTA2O","SCH4U"])
+
+def choices4():
+    return eg.textbox("Search students by student number","Student Search")
+
+def mainchoice():
+    return eg.choicebox("How would you like to search?","Welcome to the Program",["Grade","Courses","Student Number"])
+
+def showallchoice():
+    return eg.choicebox("How would you like to see?","Welcome to the Program",["Courses","Name"])
+
+
+def find_student_in_grade(grade):
+    exit_flag = "N"
+    grade_to_search = str(grade)
+    while exit_flag == "N" or exit_flag == "n" or exit_flag == "":        
+        students_searched = 0
+        ##Find all students in specified grade    
+        for i in range(len(grades)):        
+            if grades[i] == grade_to_search:
+                print s_numbers[i]
+                exit_flag = "Y"
+            else:
+                students_searched += 1
+                exit_flag = "Y"
+        if students_searched == len(grades):
+            print "No students found in grade", grade_to_search
+    
+
+
+def display_all(data):
+    exit_flag = "N"
+    while exit_flag == "N" or exit_flag == "n" or exit_flag == "":
+        if data == "students" or data == "Students":
+            print names
+        if data == "grades" or data == "Grades":
+            print grades
+        if data == "courses" or data == "Courses":
+            print courses
+        exit_flag = raw_input("Done? Y/N ")
+
+def enter_new_student(name,grade,course):
+    exit_flag = "N"
+    grade = str(grade)
+    while exit_flag == "N" or exit_flag == "n" or exit_flag == "":
+        row_to_write = [name, grade, course]
+        read_file.append(row_to_write)
+        writer = csv.writer(open("test.csv", "wb"))
+        for row in read_file:
+            writer.writerow(row)            
+        exit_flag = raw_input("Done? Y/N ")
+        
+
+reader = csv.reader(open("Data for ICS project Nov 2013.csv", "rb"))
 
 string = ""
 read_file = []
-names = []
+s_numbers = []
 grades = []
-courses = []
+c1 = []
+c2 = []
+c3 = []
+c4 = []
+c5 = []
+c6 = []
+c7 = []
+c8 = []
+c9 = []
+c10 = []
+crs_count = []
 
+## Go through the file and append each item in each column to a list
 for row in reader:
     read_file.append(row)
     for i in range(len(row)):
-        if i == 0:
-            names.append(row[i])
-        if i == 1:
+        if i == 0:##Student Numbers
+            s_numbers.append(row[i])
+        if i == 1: ##Grades         
             grades.append(row[i])
-        if i == 2:
-            courses.append(row[i])
-    for word in row:        
-        print word,
-    print '\n'
+        if i == 2:##C1
+            c1.append(row[i])
+        if i == 3:##C2
+            c2.append(row[i])
+        if i == 4:##C3
+            c3.append(row[i])
+        if i == 5:##C4
+            c4.append(row[i])
+        if i == 6:##C5
+            c5.append(row[i])
+        if i == 7:##C6
+            c6.append(row[i])
+        if i == 8:##C7
+            c7.append(row[i])
+        if i == 9:##C8
+            c8.append(row[i])
+        if i == 10:##C9
+            c9.append(row[i])
+        if i == 11:##C10
+            c10.append(row[i])
+        if i == 12:##crs_count
+            crs_count.append(row[i])
+            
 
 ##Pop all labels from the lists
-names.pop(0)
+s_numbers.pop(0)
 grades.pop(0)
-courses.pop(0)
+c1.pop(0)
+c2.pop(0)
+c3.pop(0)
+c4.pop(0)
+c5.pop(0)
+c6.pop(0)
+c7.pop(0)
+c8.pop(0)
+c9.pop(0)
+c10.pop(0)
+crs_count.pop(0)
 ###############################
 
-##Updated shit
-def find_student_in_grade(grade):
-    students_searched = 0
-    ##Find all students in specified grade    
-    for i in range(len(grades)):        
-        if grades[i] == grade:
-            print names[i]
-        else:
-            students_searched += 1
-    if students_searched == len(grades):
-        print "No students found in grade", grade
-        
-def find_student_in_course(course):
-    students_searched = 0
-    ##Find all students in specified course
-    for i in range(len(courses)):
-        if courses[i] == course:
-            print names[i]
-        else:
-            students_searched += 1
-    if students_searched == len(courses):
-        print "No students found in course", course
-
-def display_all(data):
-    if data == "students" or data == "Students":
-        print names
-    if data == "grades" or data == "Grades":
-        print grades
-    if data == "courses" or data == "Courses":
-        print courses
-
-def enter_new_student(name,grade,course):
-    row_to_write = [name, grade, course]
-    read_file.append(row_to_write)
-    writer = csv.writer(open("test.csv", "wb"))
-    for row in read_file:
-        writer.writerow(row)
-##
 
 
-exit_flag = "N"
-
-while exit_flag == "N" or exit_flag == "n" or exit_flag == "":
-    grade_to_search = raw_input("Find students in grade: ")
-    students_searched = 0
-    ##Find all students in specified grade    
-    for i in range(len(grades)):        
-        if grades[i] == grade_to_search:
-            print names[i]
-        else:
-            students_searched += 1
-    if students_searched == len(grades):
-        print "No students found in grade", grade_to_search
-    if doneornot() == 0:
-        exit_flag = "Y"
-    else:
-        exit_flag = "N"
-##    exit_flag = raw_input("Done? Y/N ")
-
-exit_flag = "N"
-
-while exit_flag == "N" or exit_flag == "n" or exit_flag == "":
-    course_to_find = raw_input("Find students in course: ")
-    students_searched = 0
-    ##Find all students in specified course
-    for i in range(len(courses)):
-        if courses[i] == course_to_find:
-            print names[i]
-        else:
-            students_searched += 1
-    if students_searched == len(courses):
-        print "No students found in course", course_to_find
-    exit_flag = raw_input("Done? Y/N ")
 
 
-exit_flag = "N"
 
-while exit_flag == "N" or exit_flag == "n" or exit_flag == "":
-    what_to_do = raw_input("Show all: ")
-    if what_to_do == "students" or what_to_do == "Students":
-        print names
-    if what_to_do == "grades" or what_to_do == "Grades":
-        print grades
-    if what_to_do == "courses" or what_to_do == "Courses":
-        print courses
-    exit_flag = raw_input("Done? Y/N ")
+######################## Main Program
+a = True
 
-exit_flag = "N"
+while a == True:
+    choice = mainchoice()
+    if choice == "Grade":
+        grade = choices2()
+        find_student_in_grade(grade)
+        if doneornot() == 0:
+            a = False
+            
+    if choice == "Courses":
+        course = choices3()
+        find_student_in_course(course)
+        if doneornot() == 0:
+            a = False
+            
+    if choice == "Student Number":
+        course = choices4()
+        find_student_in_course(course)
+        if doneornot() == 0:
+            a = False
 
-while exit_flag == "N" or exit_flag == "n" or exit_flag == "":
-    new_name = raw_input("Enter a new student: ")
-    new_grade = raw_input("Enter their grade: ")
-    new_course = raw_input("Enter their course: ")    
-    row_to_write = [new_name, new_grade, new_course]
-    read_file.append(row_to_write)
-    writer = csv.writer(open("test.csv", "wb"))
-    for row in read_file:
-        writer.writerow(row)
-    exit_flag = raw_input("Done? Y/N ")
+
+
+
+
