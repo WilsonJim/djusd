@@ -1,16 +1,17 @@
 def find_student_by_num(number):
     exit_flag = "N"
     number = str(number)
-    while exit_flag == "N" or exit_flag == "n" or exit_flag == "":        
+    while exit_flag == "N" or exit_flag == "n" or exit_flag == "":
         students_searched = 0
-        ##Find all students in specified grade    
-        for i in range(len(s_numbers)):        
+        ##Find all students in specified grade
+        for i in range(len(s_numbers)):
             if s_numbers[i] == number:
                 print s_numbers[i]
-                print c1[i]
+                for list_c in all_course_lists:
+                    print list_c[i]
                 exit_flag = "Y"
             else:
                 students_searched += 1
                 exit_flag = "Y"
         if students_searched == len(s_numbers):
-            print "No students found. Searched for ", number
+            print "No students found. Searched for", number
