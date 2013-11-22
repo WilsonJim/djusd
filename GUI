@@ -1,8 +1,6 @@
 import csv
 import easygui as eg
 
-title = "YRDSB Student-Timetable"
-eg.msgbox("Welcome to YRDSB Students-Timetable",title)
 
 def doneornot():
     return eg.ccbox("Would you like to continue searching?","System Message",["Yes","No"])
@@ -25,37 +23,41 @@ def showallchoice():
 
 def find_student_in_grade(grade):
     exit_flag = "N"
+    templist = []
     grade_to_search = str(grade)
     while exit_flag == "N" or exit_flag == "n" or exit_flag == "":        
         students_searched = 0
         ##Find all students in specified grade    
         for i in range(len(grades)):        
             if grades[i] == grade_to_search:
-                print s_numbers[i]
+                templist.append(s_numbers[i] + "\n")
                 exit_flag = "Y"
             else:
                 students_searched += 1
                 exit_flag = "Y"
+        eg.textbox("Students in the grade","hi",templist)
         if students_searched == len(grades):
             print "No students found in grade", grade_to_search
 
 def find_student_by_num(number):
     number = str(number)
     exit_flag = "N"
+    templist = []
     while exit_flag == "N" or exit_flag == "n" or exit_flag == "":        
         students_searched = 0
         ##Find all students in specified grade    
         for i in range(len(s_numbers)):        
             if s_numbers[i] == number:
-                print s_numbers[i]
                 for list_c in all_course_lists:
-                    print list_c[i]
+                    templist.append(list_c[i] + "\n")
                 exit_flag = "Y"
             else:
                 students_searched += 1
                 exit_flag = "Y"
         if students_searched == len(s_numbers):
-            print "No students found. Searched for", number
+            eg.msgbox("No Students Found", "Database Error")
+        else:
+            eg.textbox("Course Selections for the student","hi", templist)
 
 
 def display_all(data):
@@ -169,6 +171,10 @@ all_course_lists = [c1,c2,c3,c4,c5,c6,c7,c8,c9,c10]
 
 
 ######################## Main Program
+
+title = "YRDSB Student-Timetable"
+eg.msgbox("Welcome to YRDSB Students-Timetable",title)
+
 a = True
 
 while a == True:
@@ -178,6 +184,9 @@ while a == True:
         find_student_in_grade(grade)
         if doneornot() == 0:
             a = False
+    elif choice == None:
+        a = False
+        pass
             
     if choice == "Courses":
         course = choices3()
