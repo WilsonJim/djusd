@@ -98,14 +98,13 @@ def find_student_by_num(number):
             eg.textbox("Course Selections for the student","hi", templist)  
 
 def enter_new_student(gender,first_name,last_name,s_number,grade,c1,c2,c3,c4,c5,c6,c7,c8,c9,c10,crs_count):
-    exit_flag = "N"    
+    exit_flag = "N"  
     grade = str(grade)
-    s_number = str(s_number)
-    while exit_flag == "N" or exit_flag == "n" or exit_flag == "":
-        row_to_write = [gender,first_name,last_name,s_number,grade,c1,c2,c3,c4,c5,c6,c7,c8,c9,c10,crs_count]
-        read_file.append(row_to_write)
-        writer = csv.writer(open("Data for ICS project Nov 2013.csv", "wb"))
-        for row in read_file:
-            writer.writerow(row)            
-        exit_flag = raw_input("Done? Y/N ")
-        
+    s_number = str(s_number)    
+    row_to_write = [gender,first_name,last_name,s_number,grade,c1,c2,c3,c4,c5,c6,c7,c8,c9,c10,crs_count]
+    read_file.append(row_to_write)
+    writer = csv.writer(open("Data for ICS project Nov 2013.csv", "wb"))
+    for row in read_file:
+        print "Writing to file..."            
+        writer.writerow(row)        
+    print "Finished"
