@@ -1,0 +1,9 @@
+image = "YRDSBlogo.gif"
+title = "Welcome to YRDSB Student-Timetable Software "
+choices = ["Proceed", "Cancel"]
+reply = eg.buttonbox(title,image=image,choices=choices)
+
+if reply == None:
+    sys.exit
+else:
+    
