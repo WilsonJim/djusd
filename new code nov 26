@@ -52,14 +52,15 @@ for row in reader:
             c9.append(row[i])
         if i == 14:
             c10.append(row[i])
-##    for word in row:        
-##        print word,
-##    print '\n'
+        if i == 15:
+            crs_count.append(row[i])
+
 
 ##Pop all labels from the lists
 s_numbers.pop(0)
 genders.pop(0)
 names.pop(0)
+surnames.pop(0)
 grades.pop(0)
 c1.pop(0)
 c2.pop(0)
@@ -71,34 +72,12 @@ c7.pop(0)
 c8.pop(0)
 c9.pop(0)
 c10.pop(0)
+crs_count.pop(0)
 ###############################
 all_course_lists = [c1,c2,c3,c4,c5,c6,c7,c8,c9,c10]
 
-
-def find_student_by_num(number):
-    number = str(number)
-    exit_flag = "N"
-    templist = []
-    while exit_flag == "N" or exit_flag == "n" or exit_flag == "":
-        students_searched = 0
-        ##Find all students in specified grade
-        for i in range(len(s_numbers)):
-            if s_numbers[i] == number:
-                templist.append("Name: " + names[i] + " " + surnames[i] + "\n")
-                templist.append("Grade: " + grades[i] +"\n")
-                for list_c in all_course_lists:                
-                    templist.append(list_c[i] + "\n")                    
-                exit_flag = "Y"
-            else:
-                students_searched += 1
-                exit_flag = "Y"
-        if students_searched == len(s_numbers):
-            eg.msgbox("No Students Found", "Database Error")
-        else:
-            eg.textbox("Course Selections for the student","hi", templist)  
-
+ 
 def enter_new_student(gender,first_name,last_name,s_number,grade,c1,c2,c3,c4,c5,c6,c7,c8,c9,c10,crs_count):
-    exit_flag = "N"  
     grade = str(grade)
     s_number = str(s_number)    
     row_to_write = [gender,first_name,last_name,s_number,grade,c1,c2,c3,c4,c5,c6,c7,c8,c9,c10,crs_count]
@@ -108,3 +87,82 @@ def enter_new_student(gender,first_name,last_name,s_number,grade,c1,c2,c3,c4,c5,
         print "Writing to file..."            
         writer.writerow(row)        
     print "Finished"
+
+##Refresh CSV File##############################################################################################
+reader = csv.reader(open("Data for ICS project Nov 2013.csv", "rb"))
+
+string = ""
+read_file = []
+s_numbers = []
+genders = []
+names = []
+surnames = []
+grades = []
+c1 = []
+c2 = []
+c3 = []
+c4 = []
+c5 = []
+c6 = []
+c7 = []
+c8 = []
+c9 = []
+c10 = []
+crs_count = []
+
+for row in reader:
+    read_file.append(row)
+    for i in range(len(row)):
+        if i == 0:
+            genders.append(row[i])
+        if i == 1:
+            names.append(row[i])
+        if i == 2:
+            surnames.append(row[i])
+        if i == 3:
+            s_numbers.append(row[i])
+        if i == 4:            
+            grades.append(row[i])
+        if i == 5:
+            c1.append(row[i])
+        if i == 6:
+            c2.append(row[i])
+        if i == 7:
+            c3.append(row[i])
+        if i == 8:
+            c4.append(row[i])
+        if i == 9:
+            c5.append(row[i])
+        if i == 10:
+            c6.append(row[i])
+        if i == 11:
+            c7.append(row[i])
+        if i == 12:
+            c8.append(row[i])
+        if i == 13:
+            c9.append(row[i])
+        if i == 14:
+            c10.append(row[i])
+        if i == 15:
+            crs_count.append(row[i])
+
+
+##Pop all labels from the lists
+s_numbers.pop(0)
+genders.pop(0)
+names.pop(0)
+surnames.pop(0)
+grades.pop(0)
+c1.pop(0)
+c2.pop(0)
+c3.pop(0)
+c4.pop(0)
+c5.pop(0)
+c6.pop(0)
+c7.pop(0)
+c8.pop(0)
+c9.pop(0)
+c10.pop(0)
+crs_count.pop(0)
+###############################
+all_course_lists = [c1,c2,c3,c4,c5,c6,c7,c8,c9,c10]
